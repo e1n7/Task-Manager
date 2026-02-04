@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <i class="fas fa-tasks"></i>
+                    Task Manager Pro
+                </h1>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Tasks</span>
+                        <span class="stat-value" id="totalTasks">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Completed</span>
+                        <span class="stat-value" id="completedTasks">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Progress</span>
+                        <span class="stat-value" id="progressPercent">0%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search tasks..." data-testid="search-input">
+            </div>
+            <button class="btn btn-primary" id="addTaskBtn" data-testid="add-task-btn">
+                <i class="fas fa-plus"></i>
+                Add New Task
+            </button>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-category="all" data-testid="filter-all">
+                <i class="fas fa-th"></i> All
+            </button>
+            <button class="filter-btn" data-category="work" data-testid="filter-work">
+                <i class="fas fa-briefcase"></i> Work
+            </button>
+            <button class="filter-btn" data-category="personal" data-testid="filter-personal">
+                <i class="fas fa-user"></i> Personal
+            </button>
+            <button class="filter-btn" data-category="shopping" data-testid="filter-shopping">
+                <i class="fas fa-shopping-cart"></i> Shopping
+            </button>
+            <button class="filter-btn" data-category="health" data-testid="filter-health">
+                <i class="fas fa-heartbeat"></i> Health
+            </button>
+        </div>
+
+        <div class="tasks-container" id="tasksContainer" data-testid="tasks-container">
+            <!-- Tasks will be dynamically inserted here -->
+        </div>
+
+        <div class="empty-state" id="emptyState">
+            <i class="fas fa-clipboard-list"></i>
+            <h2>No tasks yet</h2>
+            <p>Click "Add New Task" to create your first task</p>
+        </div>
+    </div>
+
+    <!-- Add/Edit Task Modal -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Task</h2>
+                <button class="close-btn" id="closeModal" data-testid="close-modal-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskTitle">Task Title *</label>
+                    <input type="text" id="taskTitle" required placeholder="Enter task title" data-testid="task-title-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="taskDescription">Description</label>
+                    <textarea id="taskDescription" rows="3" placeholder="Enter task description" data-testid="task-description-input"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskCategory">Category *</label>
+                        <select id="taskCategory" required data-testid="task-category-select">
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="health">Health</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="taskPriority">Priority *</label>
+                        <select id="taskPriority" required data-testid="task-priority-select">
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="taskDueDate">Due Date</label>
+                    <input type="datetime-local" id="taskDueDate" data-testid="task-due-date-input">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn" data-testid="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" data-testid="submit-task-btn">
+                        <i class="fas fa-save"></i>
+                        Save Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
